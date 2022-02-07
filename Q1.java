@@ -20,7 +20,7 @@ public class Q1
    {  
     LinkedList<Integer> linkedList = new LinkedList<Integer>( Arrays.asList(1,3,5,7,9,11) );
     System.out.println("LinkedList before insertion : " + linkedList);
-    addAndSort(linkedList, 12);
+    addAndSort(linkedList, 6);
     System.out.println("LinkedList after  insertion : " + linkedList);
    }  
 }  
