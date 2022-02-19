@@ -2,43 +2,49 @@ import java.util.*;
 
 public class Q5 {
  
-    public static void swapValues ( LinkedList<String>              linkedListKeys , 
+    public static void swapValues(  LinkedList<String>              linkedListKeys, 
                                     LinkedHashMap<String,Integer>   linkedHashMap, 
                                     int                             indexOne, 
                                     int                             indexTwo)
     {
         if( linkedListKeys.size() != linkedHashMap.size() ) return;
-
+        LinkedHashMap<String,Integer>  newHashMap = new LinkedHashMap<String,Integer>(); 
         String  firstKey = linkedListKeys.get(indexOne);
         Integer firstValue = linkedHashMap.get(firstKey);
-
         String  secondKey = linkedListKeys.get(indexTwo);
         Integer secondValue = linkedHashMap.get(secondKey);
+
         for(int i = 0 ; i < linkedListKeys.size() ; i++)
         {
             if(i == indexOne)
             {
-                linkedHashMap.remove(firstKey);
-                linkedHashMap.put(secondKey,secondValue);
+                newHashMap.put(secondKey,secondValue);
             }
             else if(i == indexTwo)
             {
-                linkedHashMap.remove(secondKey);
-                linkedHashMap.put(firstKey,firstValue);
+                newHashMap.put(firstKey,firstValue);
             }
             else
             {
                 String  oldKey = linkedListKeys.get(i);
                 Integer oldValue = linkedHashMap.get(oldKey);
-                linkedHashMap.remove(oldKey);
-                linkedHashMap.put(oldKey,oldValue);
+                newHashMap.put(oldKey,oldValue);
             }
         }
         linkedListKeys.remove(indexOne);
         linkedListKeys.add(indexOne,secondKey);
         linkedListKeys.remove(indexTwo);
         linkedListKeys.add(indexTwo,firstKey);
+
+        for(int i = 0 ; i < linkedListKeys.size() ; i++)
+        {
+            String  newKey = linkedListKeys.get(i);
+            Integer newValue = newHashMap.get(newKey); 
+            linkedHashMap.remove(newKey);
+            linkedHashMap.put(newKey,newValue);
+        }
     }
+
     public static void main(String args[])
     {  
             LinkedList<String>              linkedListKeys   = new LinkedList<String>();
@@ -52,5 +58,11 @@ public class Q5 {
                                     Integer.valueOf( linkedListValues.get(i) ) );
             }
 
+            System.out.println("LinkedList before swap : " + linkedHashMap);
+            swapValues(linkedListKeys,linkedHashMap, 5, 1);
+            System.out.println("LinkedList after  swap : " + linkedHashMap);
     } 
 }
+
+// javac Q5.java
+// java  Q5
